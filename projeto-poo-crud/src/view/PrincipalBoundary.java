@@ -57,4 +57,7 @@ public class PrincipalBoundary extends Application {
         stage.show();
     }
     
+    public static void main(String[] args) {
+        Application.launch(PrincipalBoundary.class, args);
+    }
 }

@@ -41,7 +41,9 @@ public class MusicaBoundary implements Tela {
                 control.gravar();
             } catch (PlaylistException err) {
                 new Alert(Alert.AlertType.ERROR, "Erro ao gravar a música", ButtonType.OK).showAndWait();
-            }
+            } catch (Exception e1) {
+                            e1.printStackTrace();
+                        }
             tableView.refresh();
         });
 

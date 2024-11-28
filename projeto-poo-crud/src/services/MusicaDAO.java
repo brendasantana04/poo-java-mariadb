@@ -6,7 +6,7 @@ import models.Musica;
 import tools.PlaylistException;
 
 public interface MusicaDAO {
-    void inserir( Musica c ) throws PlaylistException;
+    void inserir( Musica c ) throws PlaylistException, Exception;
     void atualizar( Musica c ) throws PlaylistException;
     void remover( Musica c ) throws PlaylistException;
     List<Musica> pesquisarPorTitulo( String nome ) throws PlaylistException;

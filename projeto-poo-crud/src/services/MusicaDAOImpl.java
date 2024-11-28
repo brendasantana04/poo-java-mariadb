@@ -5,6 +5,7 @@ import tools.DatabaseConnection;
 import tools.PlaylistException;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,10 +16,25 @@ public class MusicaDAOImpl implements MusicaDAO {
 
 
     //definindo conexão com a maria
+    private final static String DB_CLASS = "org.mariadb.jdbc.Driver";
+    private final static String DB_URL = "jdbc:mariadb://localhost:3306/musicadb";
+    private final static String DB_USER = "haine";
+    private final static String DB_PASS = "1234";
+
     private Connection con = null;
+    
+
+    public MusicaDAOImpl() throws PlaylistException { 
+        try { 
+            Class.forName(DB_CLASS);
+            con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+        } catch (ClassNotFoundException | SQLException e) { 
+            throw new PlaylistException("Erro ao conectar ao banco de dados");
+        }
+    }
 
     @Override
-    public void inserir(Musica musica) throws PlaylistException {
+    public void inserir(Musica musica) throws Exception {
         try (Connection con = DatabaseConnection.getConnection()) {
             System.out.println("Entrando aqui");
             String sql = "INSERT INTO musicas (titulo, artista, album, duracao) VALUES (?, ?, ?, ?)";
@@ -34,7 +50,7 @@ public class MusicaDAOImpl implements MusicaDAO {
                 System.out.println("Erro ao preparar o statement: " + e.getMessage());
                 throw new PlaylistException(e);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             System.out.println("Erro ao conectar com o banco de dados 1: " + e.getMessage());
             throw new PlaylistException("Erro ao inserir música");
         }
