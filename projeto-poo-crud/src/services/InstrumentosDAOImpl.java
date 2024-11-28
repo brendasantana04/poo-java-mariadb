@@ -23,6 +23,7 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
     private Connection con = null;
     
 
+    
     public InstrumentosDAOImpl() throws PlaylistException { 
         try { 
             Class.forName(DB_CLASS);
@@ -34,15 +35,15 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
 
     //inserindo dados no banco de dados
     @Override
-    public void inserir (Instrumentos instrumentos) throws PlaylistException {
+    public void inserir (Instrumentos i) throws PlaylistException {
         try (Connection con = DatabaseConnection.getConnection()){
             System.out.println("entrando no inserir");
-            String sql = "INSERT INTO musicas (nome, preco, tipo) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO instrumentos (tipo, preco, nome) VALUES (?, ?, ?)";
 
             try (PreparedStatement stmt = con.prepareStatement(sql)){
-                stmt.setString(1, Instrumentos.getNome());
-                stmt.setDouble(1, Instrumentos.getPreco());
-                stmt.setString(1, Instrumentos.getTipo());
+                stmt.setString(3, i.getTipo());
+                stmt.setDouble(2, i.getPreco());
+                stmt.setString(1, i.getNome());
 
                 int rowsAffected = stmt.executeUpdate();
                 System.out.println("Linhas que foram inseridas: " + rowsAffected);
@@ -57,7 +58,7 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
     }
 
     @Override
-    public void atualizar(Instrumentos instrumentos) throws PlaylistException {
+    public void atualizar(Instrumentos i) throws PlaylistException {
         try {
             String SQL = """
                 UPDATE instrumentos SET nome = ?, preco = ?, tipo = ?
@@ -65,10 +66,10 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
                 """;
         PreparedStatement stm = con.prepareStatement(SQL);
 
-        stm.setString('1', Instrumentos.getNome());
-        stm.setDouble('2', Instrumentos.getPreco());
-        stm.setString('3', Instrumentos.getTipo());
-        stm.setInt('4', Instrumentos.getId());
+        stm.setString('1', i.getNome());
+        stm.setDouble('2', i.getPreco());
+        stm.setString('3', i.getTipo());
+        stm.setInt('4', i.getId());
         stm.executeUpdate();
         } catch (SQLException e) {
             throw new PlaylistException("Erro ao tentar atualizar a musica. " + e);
@@ -76,13 +77,13 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
     }
 
     @Override
-    public void remover(Instrumentos instrumentos) throws PlaylistException {
+    public void remover(Instrumentos i) throws PlaylistException {
         try { 
             String SQL = """
                     DELETE FROM instrumentos WHERE id = ?
                     """;
             PreparedStatement stm = con.prepareStatement(SQL);
-            stm.setInt(1, Instrumentos.getId());
+            stm.setInt(1, i.getId());
             stm.executeUpdate();
         } catch (SQLException e) { 
             throw new PlaylistException("Erro ao remover música");
@@ -101,10 +102,10 @@ public class InstrumentosDAOImpl implements InstrumentosDAO{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) { 
                 Instrumentos i = new Instrumentos();
-                Instrumentos.setId(rs.getInt("id"));
-                Instrumentos.setNome(rs.getString("nome"));
-                Instrumentos.setPreco(rs.getDouble("preco"));
-                Instrumentos.setTipo(rs.getString("tipo"));
+                i.setId(rs.getInt("id"));
+                i.setNome(rs.getString("nome"));
+                i.setPreco(rs.getDouble("preco"));
+                i.setTipo(rs.getString("tipo"));
                 lista.add(i);
             }
         } catch (SQLException e) { 

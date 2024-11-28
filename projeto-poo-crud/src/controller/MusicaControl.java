@@ -90,11 +90,11 @@ public class MusicaControl {
     // Pesquisa todas as músicas
     public void pesquisarTodos() throws PlaylistException {
         lista.clear();
-        List<Musica> resultado = musicaDAO.pesquisarPorTitulo(""); // Traz todas as músicas
+        List<Musica> resultado = musicaDAO.pesquisarPorTitulo(""); 
         lista.addAll(resultado);
     }
 
-    // Propriedades para vinculação com a interface (JavaFX)
+    // Propriedades para vinculação com a interface 
     public IntegerProperty idProperty() {
         return this.id;
     }

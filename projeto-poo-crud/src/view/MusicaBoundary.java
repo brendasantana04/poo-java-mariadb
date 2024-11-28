@@ -56,14 +56,13 @@ public class MusicaBoundary implements Tela {
             }
         });
 
-        Button btnNovo = new Button("Limpar tudo");
-        btnNovo.setOnAction(e -> control.limparTudo());
+        Button btnLimpar = new Button("Limpar tudo");
+        btnLimpar.setOnAction(e -> control.limparTudo());
 
         // paneForm.add(new Label("Id: "), 0, 0);
         // paneForm.add(lblId, 1, 0);
         paneForm.add(new Label("Título: "), 0, 1);
         paneForm.add(txtTitulo, 1, 1);
-        paneForm.add(btnNovo, 2, 1);
         paneForm.add(new Label("Artista: "), 0, 2);
         paneForm.add(txtArtista, 1, 2);
         paneForm.add(new Label("Álbum: "), 0, 3);
@@ -72,7 +71,8 @@ public class MusicaBoundary implements Tela {
         paneForm.add(txtDuracao, 1, 5);
 
         paneForm.add(btnGravar, 0, 6);
-        paneForm.add(btnPesquisar, 1, 6);
+        paneForm.add(btnPesquisar, 2, 1);
+        paneForm.add(btnLimpar, 1, 6);
 
         ligacoes();
         gerarColunas();

@@ -11,7 +11,6 @@ public interface InstrumentosDAO {
     void inserir (Instrumentos i) throws PlaylistException;
     void atualizar (Instrumentos i) throws PlaylistException;
     void remover (Instrumentos i) throws PlaylistException;
-
     List<Instrumentos> pesquisarPorNome (String nome) throws PlaylistException;
 
 }

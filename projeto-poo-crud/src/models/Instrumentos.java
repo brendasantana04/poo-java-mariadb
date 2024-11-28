@@ -2,41 +2,46 @@ package models;
 
 public class Instrumentos {
     
-    private static Integer id;
-    private static String tipo;
-    private static Double preco;
-    private static String nome;
+    private Integer id;
+    private String tipo;
+    private Double preco;
+    private String nome;
 
-    public static Integer getId() {
+    // Getters e Setters
+    public Integer getId() {
         return id;
     }
-    public static void setId(Integer id) {
-        Instrumentos.id = id;
+
+    public void setId(Integer id) {
+        this.id = id;
     }
-    public static String getTipo() {
+
+    public String getTipo() {
         return tipo;
     }
-    public static void setTipo(String tipo) {
-        Instrumentos.tipo = tipo;
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
-    public static Double getPreco() {
+
+    public Double getPreco() {
         return preco;
     }
-    public static void setPreco(Double preco) {
-        Instrumentos.preco = preco;
-    }
-    
 
-    
-    public static String getNome() {
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public String getNome() {
         return nome;
     }
-    public static void setNome(String nome) {
-        Instrumentos.nome = nome;
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override
     public String toString() {
-        return "Instrumentos []";
+        return "Instrumentos [id=" + id + ", tipo=" + tipo + ", preco=" + preco + ", nome=" + nome + "]";
     }
 }
